@@ -48,6 +48,6 @@ class SubjectEntry extends React.Component {
         </div>
 
     }
-}
+};
 
 export default SubjectEntry;

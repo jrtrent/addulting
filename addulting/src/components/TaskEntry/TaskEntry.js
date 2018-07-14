@@ -1,7 +1,8 @@
 import React from "react";
 import "./TaskEntry.css"
 import { Container, Row, Col } from "../Grid";
-import { Input, TextArea, FormBtn } from "../../components/Form";
+import {FormGroup} from "react-bootstrap";
+
 
 class TaskEntry extends React.Component {
     state = {
@@ -25,7 +26,7 @@ class TaskEntry extends React.Component {
         this.setState({
             [name]: value
         });
-    };
+    }
 
     handleFormSubmit = (e) => {
         e.prevenDefault();
@@ -37,18 +38,33 @@ class TaskEntry extends React.Component {
 
         })
         .catch(err => console.log(err));
-    };
+    }
 
     render() {
-        return
-        <Container fluid>
-        <Row>
-            <Col size="md-6">
-                <p>What are the two most important tasks to be completed today></p>
-            <form>
-                <input name="newTask" onChange={this.handleInputChange}
-                
+            return <div>
+            <Container fluid>
+            <Row>
+                <Col size="md-6">
+                    
+                        <form>
+                                <FormGroup
+                                    controlID="formBasicText">
+                                    <ControlLabel>What are the two most important 
+                                        tasks to be completed today></ControlLabel>
+                                <FormControl
+                                type="text"
+                                name="newTask"
+                                onChange={this.handleInputChange}
+                                />
+                            </FormGroup>  
+                        </form>
+                    </Col>
+                </Row>
+            </Container>
+        </div>               
         
     }
 
-}
+};
+
+export {default} TaskEntry;
