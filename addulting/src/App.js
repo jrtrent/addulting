@@ -9,9 +9,15 @@ import SubjectEntry from './components/SubjectEntry'
 
 
 const App = () => (
-	<div>
-		<SubjectEntry />
-	</div>
+	<Router>
+		<div>
+			<Switch>
+				<Route exact path="/" component={Login} />
+				<Route exact path="/SubjectEntry" component={SubjectEntry}/>
+				<Route exact path="SignupForm" component={SignupForm}/>
+			</Switch>
+		</div>
+	</Router>
 );
 
 

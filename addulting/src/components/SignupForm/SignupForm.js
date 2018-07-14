@@ -1,23 +1,20 @@
-mport React, {Component} from 'react'
-import { Redirect } from 'react-router-dom'
+import React from 'react'
 import axios from 'axios'
 import "./SignupForm.css";
 
 class SignupForm extends React.Component {
-    constructor()  {
-        super();
-        this.state = {
+    state = {
             username: '',
             password: '',
-            confrimPassword:'',
-            redirectTo: null
-        }
+            confirmPassword:'',
+        } 
 
-        //e6?
-        this.handleSubmit =this.handleSubmit.bind(this)
-        this.handleChange = this.handleChange.bind(this)
+    handleNewUser=(e) => {
+        e.preventDefault();
+        this.setState({
+            newUser: e.target.value
+        })
     }
-
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -46,9 +43,6 @@ class SignupForm extends React.Component {
     }
 
     render() {
-        if(this.state.redirectTo){
-            return <Redirect to={{pathname:this.state.redirectTo}} />
-        } else {
             return (
                 <div className="SignupForm">
                 <h1>Signup Form</h1>
@@ -83,5 +77,5 @@ class SignupForm extends React.Component {
         }
     }
    
-}
+
 export default SignupForm

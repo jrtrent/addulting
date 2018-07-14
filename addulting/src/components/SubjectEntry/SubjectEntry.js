@@ -1,4 +1,5 @@
 import React from "react";
+import {Container, Row, Col}from "../Grid";
 import "./SubjectEntry.css";
 
 class SubjectEntry extends React.Component {
@@ -31,13 +32,19 @@ class SubjectEntry extends React.Component {
 
     render() {
         return <div>
-            
-            <form onSubmit={this.handleNewSubject}>
-                <input name="new-subject" onChange={this.handleSubjectChange} />
-            </form>
-
-            {this.state.subjects.map((subject, idx) => <p>
-                <span style={{ marginRight: '1em' }} onClick={() => this.removeItem(idx)}>X</span>{subject}</p>)}
+            <Container fluid >
+                <Row>
+                    <Col size=" sm 4 md-8">
+                        <p>What are the four main areas of your life, in which you need to accomplish tasks.</p>
+                            <form onSubmit={this.handleNewSubject}>
+                                <input name="new-subject" onChange={this.handleSubjectChange} />
+                            </form>
+                
+                            {this.state.subjects.map((subject, idx) => <p>
+                            <span style={{ marginRight: '1em' }} onClick={() => this.removeItem(idx)}>X</span>{subject}</p>)}
+                    </Col>
+                 </Row>
+            </Container>
         </div>
 
     }
