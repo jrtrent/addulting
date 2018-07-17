@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/testuser");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/addulting");
 
 var db =mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

@@ -6,7 +6,7 @@ class SignupForm extends React.Component {
     state = {
             username: '',
             password: '',
-            confirmPassword:'',
+           
         } 
 
     handleNewUser=(e) => {
@@ -29,7 +29,7 @@ class SignupForm extends React.Component {
             username: this.state.username,
             password: this.state.password
         })
-        .thn(response => {
+        .then(response => {
             console.log(response)
             if(!response.data.errmsg) {
                 console.log('signin complete')
@@ -62,13 +62,7 @@ class SignupForm extends React.Component {
                 onChange={this.handleChange}
                 />
 
-                <label htmlFor="confirmpassword">Confrim Password: </label>
-                <input
-                type="password"
-                name="confrimpassword"
-                value={this.state.confrimpassword}
-                onChange={this.handleChange}
-                />
+            
                 <button onClick={this.handleSubmit}>Signup</button>
                 
                 </div>

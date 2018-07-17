@@ -1,6 +1,7 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 import "./Login.css";
+import axios from "axios"
 
 class Login extends React.Component {
     constructor()  {
@@ -27,10 +28,16 @@ class Login extends React.Component {
     handleSubmit =(e) => {
         e.preventDefault();
         console.log('handlesubmit');
-        this.props._login(this.state.username, this.state.password)
-        this.setState({
-            redirectTo:"/"
-        })
+        if (this.state.username && this.state.password) {
+            axios.post({
+              username: this.state.username,
+              password: this.state.password
+             
+            })
+              .then(res => this.loadBooks())
+              .catch(err => console.log(err));
+          
+        };
     }
 
     render() {
