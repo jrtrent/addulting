@@ -1,19 +1,24 @@
-import React from "react";
+import React, {Component} from "react";
 import "./TaskEntry.css"
 import { Container, Row, Col } from "../Grid";
-import {FormGroup} from "react-bootstrap";
+import { Input, TextArea, FormBtn } from "../../components/Form";
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 
-class TaskEntry extends React.Component {
+
+class TaskEntry extends Component {
     state = {
         tasks:[],
         newTask:"",
         priority:"",
         estTime:"",
-        recurring:""
+        recurring:"",
+        selectedOption:""
 
     }
     
+   
     handleNewTask =(e) =>{
         e.prevenDefault();
         this.setState({
@@ -21,50 +26,72 @@ class TaskEntry extends React.Component {
             })
     }
 
-    handleInputChange = (e) => {
-        const {name, value} =event.target;
+    handleInputChange = event => {
+        const name =event.target.value;
+         const value = event.target.name;
         this.setState({
             [name]: value
-        });
+        })
     }
+
+    handleChange = (selectedOption) => {
+        this.setState({selectedOption});
+        console.log(`Selected: ${selectedOption.label}`);
+    }
+    
 
     handleFormSubmit = (e) => {
         e.prevenDefault();
         // add in if statement of required?
-        API.saveTask({            
+        const newTask ={            
         priority:this.state.priority,
         estTime:this.state.estTime,
         recurring:this.state.recurring
 
-        })
+        }
         .catch(err => console.log(err));
     }
 
     render() {
-            return <div>
+        const { selectedOption} = this.state;
+        const value = selectedOption && selectedOption.value;
+            return(
+                 <div>
             <Container fluid>
             <Row>
                 <Col size="md-6">
                     
-                        <form>
-                                <FormGroup
-                                    controlID="formBasicText">
-                                    <ControlLabel>What are the two most important 
-                                        tasks to be completed today></ControlLabel>
-                                <FormControl
-                                type="text"
-                                name="newTask"
-                                onChange={this.handleInputChange}
-                                />
-                            </FormGroup>  
+                    <form>
+                        <Input onChange={this.handleInputChange} value={this.state.newTask} name="newTask" placeholder="New Task" />
+                        <Select
+                            name="form-field-name"
+                            value={this.state.priority}
+                            onChange={this.handleChange}
+                             options={[
+                            { value: 'low', label: 'low' },
+                            { value: 'medium', label: 'medium' },
+                            { value: 'high', label: 'high' },
+                             ]}
+                            />   
+                        <Select
+                            name="form-field-name"
+                            value={this.state.recurrring}
+                            onChange={this.handleChange}
+                             options={[
+                            { value: 'yes', label: 'Yes' },
+                            { value: 'No', label: 'No' },
+                            
+                             ]}
+                            />                               
+                            <FormBtn onClick={this.handleFormSubmit}>Save Task</FormBtn> 
                         </form>
                     </Col>
                 </Row>
             </Container>
         </div>               
-        
+            );
     }
 
 };
 
-export {default} TaskEntry;
+export default TaskEntry;
