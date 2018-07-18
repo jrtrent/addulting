@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import "./TaskEntry.css"
 import { Container, Row, Col } from "../Grid";
-import { Input, TextArea, FormBtn } from "../../components/Form";
+import { Input, FormBtn } from "../../components/Form";
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
@@ -43,18 +43,18 @@ class TaskEntry extends Component {
     handleFormSubmit = (e) => {
         e.prevenDefault();
         // add in if statement of required?
-        const newTask ={            
-        priority:this.state.priority,
-        estTime:this.state.estTime,
-        recurring:this.state.recurring
+       // const newTask ={            
+       // priority:this.state.priority,
+       //// estTime:this.state.estTime,
+       /// recurring:this.state.recurring
 
-        }
-        .catch(err => console.log(err));
+       // }
+       // .catch(err => console.log(err));
     }
 
     render() {
         const { selectedOption} = this.state;
-        const value = selectedOption && selectedOption.value;
+      //  const value = selectedOption && selectedOption.value;
             return(
                  <div>
             <Container fluid>

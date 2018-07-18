@@ -1,12 +1,34 @@
 import React from "react";
 import {Container, Row, Col}from "../Grid";
+import {FormBtn} from "../Form";
+import API from "../../utils/API";
+
 import "./SubjectEntry.css";
 
 class SubjectEntry extends React.Component {
     state = {
         subjects: [],
         newSubject: ''
-    }
+    };
+
+    componentDidMount() {
+        this.loadSubjects();
+      }
+    
+      loadSubjects = () => {
+        API.getSubjects()
+          .then(res =>
+            this.setState({ subjects: res.data, topic: "" })
+          )
+          .catch(err => console.log(err));
+      };
+    
+      deleteSubject = id => {
+        API.deleteSubject(id)
+          .then(res => this.loadSubjects())
+          .catch(err => console.log(err));
+      };
+    
     handleNewSubject = (e) => {
         e.preventDefault();
 
@@ -26,9 +48,16 @@ class SubjectEntry extends React.Component {
 
     }
 
-    removeItem = idx => {
-        this.setState({ subjects: this.state.subjects.filter((subject, x) => x !== idx) })
-    }
+    handleFormSubmit = event => {
+        event.preventDefault();
+          API.saveSubjects({
+            topic: this.state.subjects
+           
+          })
+            .then(res => this.loadSubjects())
+            .catch(err => console.log(err));
+        
+    };
 
     render() {
         return <div>
@@ -42,6 +71,11 @@ class SubjectEntry extends React.Component {
                 
                             {this.state.subjects.map((subject, idx) => <p>
                             <span style={{ marginRight: '1em' }} onClick={() => this.removeItem(idx)}>X</span>{subject}</p>)}
+                            <FormBtn
+                             onClick={this.handleFormSubmit}
+                            >
+                                Submit Subjects
+                            </FormBtn>
                     </Col>
                  </Row>
             </Container>
