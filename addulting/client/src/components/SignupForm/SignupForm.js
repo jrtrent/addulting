@@ -1,11 +1,12 @@
 import React from 'react'
-import axios from 'axios'
+import API from "../../utils/API"
 import "./SignupForm.css";
 
 class SignupForm extends React.Component {
     state = {
             username: '',
             password: '',
+            email:''
            
         } 
 
@@ -25,9 +26,10 @@ class SignupForm extends React.Component {
 
     handleSubmit =(e) => {
         e.preventDefault();
-        axios.post('/auth/signup', {
+        API.saveUser({
             username: this.state.username,
-            password: this.state.password
+            password: this.state.password,
+            email: this.state.email
         })
         .then(response => {
             console.log(response)
@@ -59,6 +61,14 @@ class SignupForm extends React.Component {
                 type="password"
                 name="password"
                 value={this.state.password}
+                onChange={this.handleChange}
+                />
+
+                 <label htmlFor="email">Email: </label>
+                <input
+                type="email"
+                name="email"
+                value={this.state.email}
                 onChange={this.handleChange}
                 />
 

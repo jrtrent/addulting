@@ -53,7 +53,7 @@ class TaskEntry extends Component {
     }
 
     render() {
-        const { selectedOption} = this.state;
+       // const { selectedOption} = this.state;
       //  const value = selectedOption && selectedOption.value;
             return(
                  <div>

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const booksController = require("../../controllers/loginController");
+const loginController = require("../../controllers/loginController");
 
 router.route("/")
   

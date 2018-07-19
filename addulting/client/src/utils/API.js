@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   // Gets all subjects
   getSubjects: function() {
-    return axios.get("/api/subjects");
+    return axios.get("/api/subjects/subjectentry");
   },
   // Gets the subject with the given id
   getSubject: function(id) {
@@ -16,5 +16,9 @@ export default {
   // Saves a subject to the database
   saveSubjects: function(subjectData) {
     return axios.post("/api/subjects/subjectentry", subjectData);
+  },
+
+  saveUser: function(userData) {
+    return axios.post("/api/signupform", userData);
   }
 };
