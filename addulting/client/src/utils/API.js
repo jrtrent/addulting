@@ -19,6 +19,23 @@ export default {
   },
 
   saveUser: function(userData) {
-    return axios.post("/api/signupform", userData);
-  }
+    return axios.post("/api/users/users", userData);
+  },
+
+  getTask: function() {
+    return axios.get("/api/tasks/taskentry");
+  },
+  // Gets the subject with the given id
+  getTasks: function(id) {
+    return axios.get("/api/tasks/taskentry" + id);
+  },
+  // Deletes the subject with the given id
+  deleteTasks: function(id) {
+    return axios.delete("/api/tasks/taskentry" + id);
+  },
+  // Saves a subject to the database
+  saveTasks: function(subjectData) {
+    return axios.post("/api/tasps/taskentry", subjectData);
+  },
+
 };
