@@ -1,5 +1,6 @@
 module.exports ={
-    Subject: require("./Subject")
+    Subject: require("./Subject"),
+    Task: require("./taskModel")
  
 
 };

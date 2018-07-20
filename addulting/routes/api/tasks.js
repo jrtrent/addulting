@@ -1,14 +1,14 @@
 const router = require("express").Router();
-const tasksController = require("../../controllers/taskController");
+const tasksController = require("../../controllers/tasksController");
 
 // Matches with "/api/tasks"
-router.route("/taskentry")
+router.route("/")
   .get(tasksController.findAll)
   .post(tasksController.create);
 
 // Matches with "/api/tasks/:id"
 router
-  .route("/taskentry/:id")
+  .route("/:id")
   .get(tasksController.findById)
   .put(tasksController.update)
   .delete(tasksController.remove);

@@ -15,6 +15,7 @@ export default {
   },
   // Saves a subject to the database
   saveSubjects: function(subjectData) {
+    console.log(subjectData)
     return axios.post("/api/subjects/subjectentry", subjectData);
   },
 
@@ -23,19 +24,19 @@ export default {
   },
 
   getTask: function() {
-    return axios.get("/api/tasks/taskentry");
+    return axios.get("/api/tasks");
   },
   // Gets the subject with the given id
   getTasks: function(id) {
-    return axios.get("/api/tasks/taskentry" + id);
+    return axios.get("/api/tasks/" + id);
   },
   // Deletes the subject with the given id
   deleteTasks: function(id) {
-    return axios.delete("/api/tasks/taskentry" + id);
+    return axios.delete("/api/tasks/" + id);
   },
   // Saves a subject to the database
-  saveTasks: function(subjectData) {
-    return axios.post("/api/tasps/taskentry", subjectData);
+  saveTask: function(taskData) {
+    return axios.post("/api/tasks", taskData);
   },
 
 };

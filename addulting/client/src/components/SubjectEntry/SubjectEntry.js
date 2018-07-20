@@ -1,13 +1,14 @@
 import React from "react";
 import {Container, Row, Col}from "../Grid";
+import Jumbotron from "../Jumbotron";
 import {FormBtn} from "../Form";
 import API from "../../utils/API";
-import SubjectList from "../SubjectList";
 
 import "./SubjectEntry.css";
 
 class SubjectEntry extends React.Component {
     state = {
+        dbSubjectGroups: [],
         subjects: [],
         newSubject: ''
     };
@@ -19,7 +20,7 @@ class SubjectEntry extends React.Component {
       loadSubjects = () => {
         API.getSubjects()
           .then(res =>
-            this.setState({ subjects: res.data, topic: "" })
+            this.setState({ dbSubjectGroups: res.data.subject })
           )
           .catch(err => console.log(err));
       };
@@ -53,7 +54,7 @@ class SubjectEntry extends React.Component {
     handleFormSubmit = event => {
         event.preventDefault();
           API.saveSubjects({
-            topic: this.state.subjects
+            subjects: this.state.subjects
            
           })
             .then(res => this.loadSubjects())
@@ -70,9 +71,7 @@ class SubjectEntry extends React.Component {
                             <form onSubmit={this.handleNewSubject}>
                                 <input name="new-subject" onChange={this.handleSubjectChange} />
                             </form>
-                            <SubjectList
-                            subjects={this.state.subjects}
-                            />
+                            
                             <FormBtn
                              onClick={this.handleFormSubmit}
                             >
@@ -80,6 +79,11 @@ class SubjectEntry extends React.Component {
                             </FormBtn>
                         
                     </Col>
+                    <Col size="md-6 sm-12">
+						<Jumbotron>
+							<h1>My Subjects</h1>
+						</Jumbotron>
+					</Col>
                  </Row>
             </Container>
         </div>

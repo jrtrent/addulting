@@ -1,7 +1,7 @@
 import React from "react";
 
-const Jumbotron = () => (
-    <div className="Jumbotron"> NY TIMES ARTICLE SEARCH</div>
+const Jumbotron = ({children}) => (
+    <div className="Jumbotron"> {children}</div>
 );
 
 export default Jumbotron;

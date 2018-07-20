@@ -5,11 +5,6 @@ import Login from './components/Login';
 import SignupForm from './components/SignupForm';
 import SubjectEntry from './components/SubjectEntry';
 import TaskEntry from './components/TaskEntry';
-import TodoForm from './components/Todo';
-
-
-
-
 
 const App = () => (
 	<Router>
@@ -17,7 +12,7 @@ const App = () => (
 			<Switch>
 				<Route exact path="/" component={Login} />
 				<Route exact path="/login" component={Login} />
-				<Route exact path= "/todo" component={TodoForm}/>
+				<Route exact path= "/task" component={TaskEntry}/>
 				<Route exact path="/SubjectEntry" component={SubjectEntry}/>
 				<Route exact path="/SignupForm" component={SignupForm}/>
 				<Route exact path="/TaskEntry" component={TaskEntry}/>

@@ -1,9 +1,8 @@
 import React, {Component} from "react";
 import "./TaskEntry.css"
 import { Container, Row, Col } from "../Grid";
-import { Input, FormBtn } from "../../components/Form";
+import { FormBtn } from "../../components/Form";
 import API from "../../utils/API";
-import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
 
@@ -11,81 +10,93 @@ import 'react-select/dist/react-select.css';
 class TaskEntry extends Component {
     state = {
         tasks:[],
-        newTask:"",
+        title:"",
         priority:"",
         estTime:"",
         recurring:"",
-        selectedOption:""
 
     }
+    componentDidMount() {
+        this.loadTasks();
+      }
     
+      loadTasks = () => {
+        API.getTasks()
+          .then(res => this.setState({ tasks: res.data }))
+          .catch(err => console.log(err));
+      };
+    
+      deleteTasks = id => {
+        API.deleteTasks(id)
+          .then(res => this.loadTasks())
+          .catch(err => console.log(err));
+      };
    
-    handleNewTask =(e) =>{
-        e.prevenDefault();
-        this.setState({
-            tasks: [...this.state.tasks,this.state.newTask]
-            })
-    }
+      handleInputChange = event => {
+		const { name, value } = event.target;
+		this.setState({
+			[name]: value
+		});
+	};
 
-    handleInputChange = event => {
-        const name =event.target.value;
-         const value = event.target.name;
-        this.setState({
-            [name]: value
-        })
-    }
+   
 
-    handleChange = (selectedOption) => {
-        this.setState({selectedOption});
-        console.log(`Selected: ${selectedOption.label}`);
-    }
     
 
     handleFormSubmit = (e) => {
-        e.prevenDefault();
-        // add in if statement of required?
-       // const newTask ={            
-       // priority:this.state.priority,
-       //// estTime:this.state.estTime,
-       /// recurring:this.state.recurring
+        const newTask ={
+        title:this.state.title,           
+       priority:this.state.priority,
+       estTime:this.state.estTime,
+       recurring:this.state.recurring
 
-       // }
-       // .catch(err => console.log(err));
     }
+    API.saveTask(newTask)
+			.then(res => {
+				this.setState({
+					title: "",
+					priority: "",
+                    estTime: "",
+                    recurring:""
+				})
+
+				this.loadTasks()
+			})
+			.catch(e => {
+				console.log(e);
+			})
+	}
+
+    
+     
 
     render() {
-       // const { selectedOption} = this.state;
-      //  const value = selectedOption && selectedOption.value;
             return(
                  <div>
             <Container fluid>
             <Row>
                 <Col size="md-6">
                     
-                    <form>
-                        <Input onChange={this.handleInputChange} value={this.state.newTask} name="newTask" placeholder="New Task" />
-                        <Select
-                            name="form-field-name"
-                            value={this.state.priority}
-                            onChange={this.handleChange}
-                             options={[
-                            { value: 'low', label: 'low' },
-                            { value: 'medium', label: 'medium' },
-                            { value: 'high', label: 'high' },
-                             ]}
-                            />   
-                        <Select
-                            name="form-field-name"
-                            value={this.state.recurrring}
-                            onChange={this.handleChange}
-                             options={[
-                            { value: 'yes', label: 'Yes' },
-                            { value: 'No', label: 'No' },
-                            
-                             ]}
-                            />                               
+                        <label>
+                            New Task:
+                        </label>
+                        <input type="text" onChange={this.handleInputChange} value={this.state.title} name="task" placeholder="New Task" />
+                        <label>
+                            What Priority is this task?
+                            <select value={this.state.value} onChange={this.handleInputChange}>
+                                <option value="high">High</option>
+                                <option value="medium">Medium</option>
+                                <option value="low">Low</option>
+                            </select>
+                        </label>
+                        <label>
+                            Is this task recurring?
+                            <select value={this.state.value} onChange={this.handleInputChange}>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </label>                             
                             <FormBtn onClick={this.handleFormSubmit}>Save Task</FormBtn> 
-                        </form>
                     </Col>
                 </Row>
             </Container>
