@@ -1,21 +1,17 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 import "./Login.css";
+import API from "../../utils/API"
 import axios from "axios"
 
 class Login extends React.Component {
-    constructor()  {
-        super();
-        this.state = {
-            username: '',
-            password: '',
-            redirectTo: null
-        }
+    state = {
+        username: '',
+        password: '',
+        email:''
+       
+    } 
 
-        //e6?
-        this.handleSubmit =this.handleSubmit.bind(this)
-        this.handleChange = this.handleChange.bind(this)
-    }
 
     handleChange = (e) => {
         this.setState({
@@ -24,26 +20,32 @@ class Login extends React.Component {
         })
    
     }
+    
+    handleNewLogin=(e) => {
+        e.preventDefault();
+        this.setState({
+            newLogin: e.target.value
+        })
+    }
 
     handleSubmit =(e) => {
         e.preventDefault();
-        console.log('handlesubmit');
-        if (this.state.username && this.state.password) {
-            axios.post({
-              username: this.state.username,
-              password: this.state.password
-             
+        console.log(e);
+       API.getUser(this.state.username)
+       .then(response => {
+        console.log(response)
+        if(!response.data.errmsg) {
+            console.log('login complete')
+            this.setState({
+                redirectTo:'/subjectentry'
             })
-              .then(res => this.loadBooks())
-              .catch(err => console.log(err));
-          
-        };
+        } else {
+            console.log('login incorrect')
+        }
+    })
     }
 
     render() {
-        if(this.state.redirectTo){
-            return <Redirect to={{pathname:this.state.redirectTo}} />
-        } else {
             return (
                 <div className="Login">
                 <h1>Login Form</h1>
@@ -71,5 +73,4 @@ class Login extends React.Component {
         }
     }
    
-}
 export default Login
