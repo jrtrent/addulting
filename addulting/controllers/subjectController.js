@@ -17,7 +17,7 @@ module.exports = {
   },
   create: function(req, res) {
     db.Subject
-      .create(req.body.subjects)      
+      .create(req.body.title)      
       .then(dbModel => res.json(dbModel))
       .catch(err => res.json(err));
   },

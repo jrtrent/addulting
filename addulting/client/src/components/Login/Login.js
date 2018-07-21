@@ -1,8 +1,8 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
+
 import "./Login.css";
 import API from "../../utils/API"
-import axios from "axios"
+
 
 class Login extends React.Component {
     state = {
@@ -28,6 +28,10 @@ class Login extends React.Component {
         })
     }
 
+    loadRedirect = () => {
+        this.setState({Red:'subjectentry'})
+    }
+
     handleSubmit =(e) => {
         e.preventDefault();
         console.log(e);
@@ -36,9 +40,7 @@ class Login extends React.Component {
         console.log(response)
         if(!response.data.errmsg) {
             console.log('login complete')
-            this.setState({
-                redirectTo:'/subjectentry'
-            })
+            this.props.history.push('/subjectentry')
         } else {
             console.log('login incorrect')
         }

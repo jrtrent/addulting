@@ -1,6 +1,5 @@
 import React from "react";
 import {Container, Row, Col}from "../Grid";
-import Jumbotron from "../Jumbotron";
 import {FormBtn} from "../Form";
 import API from "../../utils/API";
 
@@ -8,7 +7,6 @@ import "./SubjectEntry.css";
 
 class SubjectEntry extends React.Component {
     state = {
-        dbSubjectGroups: [],
         subjects: [],
         newSubject: ''
     };
@@ -20,7 +18,7 @@ class SubjectEntry extends React.Component {
       loadSubjects = () => {
         API.getSubjects()
           .then(res =>
-            this.setState({ dbSubjectGroups: res.data.subject })
+            this.setState({ subjects: res.data, title: "" })
           )
           .catch(err => console.log(err));
       };
@@ -40,8 +38,7 @@ class SubjectEntry extends React.Component {
         })
         console.log(e.target)
     }
-    
-    
+
     handleSubjectChange = (e) => {
         this.setState({
             newSubject: e.target.value
@@ -53,10 +50,13 @@ class SubjectEntry extends React.Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
+        console.log("hey");
           API.saveSubjects({
-            subjects: this.state.subjects
+            
+            title: this.state.subjects
            
           })
+          
             .then(res => this.loadSubjects())
             .catch(err => console.log(err));
         
@@ -66,24 +66,20 @@ class SubjectEntry extends React.Component {
         return <div>
             <Container fluid >
                 <Row>
-                    <Col size="sm 4 md-8">
+                    <Col size=" sm 4 md-8">
                         <p>What are the four main areas of your life, in which you need to accomplish tasks.</p>
                             <form onSubmit={this.handleNewSubject}>
-                                <input name="new-subject" onChange={this.handleSubjectChange} />
+                                <input 
+                                name="new-subject"
+                                value={this.state.username}
+                                onChange={this.handleSubjectChange} />
                             </form>
-                            
                             <FormBtn
                              onClick={this.handleFormSubmit}
                             >
                                 Submit Subjects
                             </FormBtn>
-                        
                     </Col>
-                    <Col size="md-6 sm-12">
-						<Jumbotron>
-							<h1>My Subjects</h1>
-						</Jumbotron>
-					</Col>
                  </Row>
             </Container>
         </div>

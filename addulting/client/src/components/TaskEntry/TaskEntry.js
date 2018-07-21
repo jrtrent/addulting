@@ -44,8 +44,9 @@ class TaskEntry extends Component {
     
 
     handleFormSubmit = (e) => {
+        e.preventDefault
         const newTask ={
-        title:this.state.title,           
+        title:this.state.task,           
        priority:this.state.priority,
        estTime:this.state.estTime,
        recurring:this.state.recurring
@@ -80,10 +81,10 @@ class TaskEntry extends Component {
                         <label>
                             New Task:
                         </label>
-                        <input type="text" onChange={this.handleInputChange} value={this.state.title} name="task" placeholder="New Task" />
+                        <input type="text" onChange={this.handleInputChange} name="task" placeholder="New Task" />
                         <label>
                             What Priority is this task?
-                            <select value={this.state.value} onChange={this.handleInputChange}>
+                            <select name="priority" onChange={this.handleInputChange}>
                                 <option value="high">High</option>
                                 <option value="medium">Medium</option>
                                 <option value="low">Low</option>
@@ -91,7 +92,7 @@ class TaskEntry extends Component {
                         </label>
                         <label>
                             Is this task recurring?
-                            <select value={this.state.value} onChange={this.handleInputChange}>
+                            <select onChange={this.handleInputChange} name="recurring">
                                 <option value="yes">Yes</option>
                                 <option value="no">No</option>
                             </select>

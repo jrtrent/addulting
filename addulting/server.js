@@ -74,10 +74,12 @@ passport.use(new LocalStrategy(
   });
   
   app.post('/login',
-	passport.authenticate('local', { failureRedirect: '/login' }),
-	function (req, res) {
-	  res.redirect('/');
-	});
+  passport.authenticate('local', { successRedirect: '/subjectentry',
+                                   failureRedirect: '/login',
+                                   failureFlash: true })
+);
+
+	
 // Start the API server
 app.listen(PORT, function() {
 	console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);

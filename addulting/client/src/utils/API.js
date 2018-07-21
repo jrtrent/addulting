@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   // Gets all subjects
   getSubjects: function() {
-    return axios.get("/api/subjects/subjectentry");
+    return axios.get("/api/subjects");
   },
   // Gets the subject with the given id
   getSubject: function(id) {
@@ -16,7 +16,7 @@ export default {
   // Saves a subject to the database
   saveSubjects: function(subjectData) {
     console.log(subjectData)
-    return axios.post("/api/subjects/subjectentry", subjectData);
+    return axios.post("/api/subjects", subjectData);
   },
 
   saveUser: function(userData) {
@@ -35,8 +35,8 @@ export default {
     return axios.get("/api/tasks");
   },
   // Gets the subject with the given id
-  getTasks: function(id) {
-    return axios.get("/api/tasks/" + id);
+  getTasks: function() {
+    return axios.get("/api/tasks");
   },
   // Deletes the subject with the given id
   deleteTasks: function(id) {
