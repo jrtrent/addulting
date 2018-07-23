@@ -1,5 +1,7 @@
 import React from "react";
-import {Container, Row, Col}from "../Grid";
+import {Container, Row, Col} from "../Grid";
+import Jumbotron from "../Jumbotron";
+import {List, ListItem} from "../List";
 import {FormBtn} from "../Form";
 import API from "../../utils/API";
 
@@ -36,7 +38,7 @@ class SubjectEntry extends React.Component {
             subjects: [...this.state.subjects, this.state.newSubject]
            
         })
-        console.log(e.target)
+       
     }
 
     handleSubjectChange = (e) => {
@@ -57,8 +59,16 @@ class SubjectEntry extends React.Component {
            
           })
           
-            .then(res => this.loadSubjects())
-            .catch(err => console.log(err));
+            .then(response =>  { 
+                console.log(response)
+                if(!response.data.errmsg) {
+                console.log('subjects entered')
+                this.props.history.push('/taskentry')
+            } else {
+                console.log('too many subjects')
+            }
+        })
+            
         
     };
 
@@ -79,6 +89,13 @@ class SubjectEntry extends React.Component {
                             >
                                 Submit Subjects
                             </FormBtn>
+                            <Col size="md-6 sm-12">
+                            <Jumbotron>
+                                <h1>My Subjects</h1>
+                            </Jumbotron>    
+                           
+                        
+                        </Col>
                     </Col>
                  </Row>
             </Container>

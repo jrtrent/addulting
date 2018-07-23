@@ -2,9 +2,15 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 const TaskSchema = new Schema({
-    //user: {
-       // type: Schema.Types.ObjectId,
-        // ref: 'User'},
+   // user: {
+    //   type: Schema.Types.ObjectId,
+       //  ref: 'User'},
+
+   subject: {
+      type: String,
+     required:true
+
+    },
          
     title: {
         type: String,

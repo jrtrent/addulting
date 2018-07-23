@@ -5,6 +5,7 @@ import Login from './components/Login';
 import SignupForm from './components/SignupForm';
 import SubjectEntry from './components/SubjectEntry';
 import TaskEntry from './components/TaskEntry';
+import ActiveTaskTable from './components/ActiveTask';
 
 const App = () => (
 	<Router>
@@ -16,6 +17,7 @@ const App = () => (
 				<Route exact path="/SubjectEntry" component={SubjectEntry}/>
 				<Route exact path="/SignupForm" component={SignupForm}/>
 				<Route exact path="/TaskEntry" component={TaskEntry}/>
+				<Route exact path="/ActiveTask" component={ActiveTaskTable} />
 			</Switch>
 		</div>
 	</Router>

@@ -35,9 +35,7 @@ class SignupForm extends React.Component {
             console.log(response)
             if(!response.data.errmsg) {
                 console.log('signin complete')
-                this.setState({
-                    redirectTo:'/login'
-                })
+                this.props.history.push('/login')
             } else {
                 console.log('duplicate')
             }
