@@ -1,7 +1,6 @@
 import React from "react";
 import {Container, Row, Col} from "../Grid";
 import Jumbotron from "../Jumbotron";
-import {List, ListItem} from "../List";
 import {FormBtn} from "../Form";
 import API from "../../utils/API";
 

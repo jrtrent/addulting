@@ -1,0 +1,7 @@
+Container {
+    margin-top: 60px;
+    padding:10px
+}
+Panel {
+    box-shadow: 10px 20px 30px red;
+}

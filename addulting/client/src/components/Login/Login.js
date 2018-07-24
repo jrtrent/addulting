@@ -1,5 +1,6 @@
 import React from 'react'
-
+import {Panel} from 'react-bootstrap';
+import {Col} from "../Grid";
 import "./Login.css";
 import API from "../../utils/API"
 
@@ -50,7 +51,12 @@ class Login extends React.Component {
     render() {
             return (
                 <div className="Login">
+                <Col size="sm-3 md-4 app-center">
+                <Panel>
+                <Panel.Heading>
                 <h1>Login Form</h1>
+                </Panel.Heading>
+                <Panel.Body>
                 <form>
                 <label htmlFor="username">Username: </label>
                 <input
@@ -69,7 +75,11 @@ class Login extends React.Component {
                 />
                 <button onClick={this.handleSubmit}>Login</button>
                 </form>
+                </Panel.Body>
+            </Panel>
+            </Col>
                 </div>
+                
                 
             )
         }

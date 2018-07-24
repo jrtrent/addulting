@@ -1,11 +1,13 @@
 import React from "react";
-import Jumbotron from "../../components/Jumbotron";
+
 import { Container, Row, Col } from "../Grid";
 import API from "../../utils/API";
 import 'react-select/dist/react-select.css';
-import{List, ListItem} from "../List";
+import TaskDetail from "../TaskDetail";
+import {Panel,ListGroup,ListGroupItem} from "react-bootstrap";
 import SubjectEntry from "../SubjectEntry";
-import TaskEntry from "../TaskEntry"
+import TaskEntry from "../TaskEntry";
+import "./ActiveTask.css"
 
 
 class ActiveTask extends React.Component {
@@ -33,8 +35,73 @@ class ActiveTask extends React.Component {
 		return (
 			<Container fluid>
 				<Row>
-					<Col size="md-6">
-					
+					<Col size="sm-3 md-6">
+                        <Panel>
+                            <Panel.Heading>
+                                <Panel.Title componentClass="h3">
+                                    Tasks
+                                </Panel.Title>
+                            </Panel.Heading>
+                                <Panel.Body>
+                                <ListGroup>
+                                    <ListGroupItem href="#link1">
+                                        <TaskDetail />
+                                    </ListGroupItem>
+                                    <ListGroupItem href="#link2">Link 2</ListGroupItem>
+                                </ListGroup>
+                                </Panel.Body>
+                            <Panel.Footer>Complete Tasks</Panel.Footer>
+                        </Panel>
+					</Col>
+                    <Col size="sm-3 md-6">
+                        <Panel>
+                            <Panel.Heading>
+                                <Panel.Title componentClass="h3">
+                                    Tasks
+                                </Panel.Title>
+                            </Panel.Heading>
+                                <Panel.Body>
+                                <ListGroup>
+                                    <ListGroupItem href="#link1">Link 1</ListGroupItem>
+                                    <ListGroupItem href="#link2">Link 2</ListGroupItem>
+                                </ListGroup>
+                                </Panel.Body>
+                            <Panel.Footer>Complete Tasks</Panel.Footer>
+                        </Panel>
+					</Col>
+				</Row>
+                <Row>
+					<Col size="sm-3 md-6">
+                        <Panel>
+                            <Panel.Heading>
+                                <Panel.Title componentClass="h3">
+                                    Tasks
+                                </Panel.Title>
+                            </Panel.Heading>
+                                <Panel.Body>
+                                <ListGroup>
+                                    <ListGroupItem href="#link1">Link 1</ListGroupItem>
+                                    <ListGroupItem href="#link2">Link 2</ListGroupItem>
+                                </ListGroup>
+                                </Panel.Body>
+                            <Panel.Footer>Complete Tasks</Panel.Footer>
+                        </Panel>
+					</Col>
+                    <Col size="sm-3 md-6">
+                        <Panel>
+                            <Panel.Heading>
+                                <Panel.Title componentClass="h3">
+                                    Tasks
+                                </Panel.Title>
+                            </Panel.Heading>
+                                <Panel.Body>
+                                <ListGroup>
+                                    <ListGroupItem href="#link1">Link 1</ListGroupItem>
+                                    <ListGroupItem href="#link2">Link 2</ListGroupItem>
+                                </ListGroup>
+                                </Panel.Body>
+                            <Panel.Footer>Complete Tasks</Panel.Footer>
+                        </Panel>
 					</Col>
 				</Row>
 			</Container>
