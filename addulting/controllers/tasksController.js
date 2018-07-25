@@ -3,9 +3,10 @@ const db = require("../models");
 module.exports = {
   findAll: function(req, res) {
     db.Task
-      .find(req.query)
-      .sort({ date: -1 })
-      .then(dbModel => res.json(dbModel))
+      .find()
+      .then((data) => {
+        (res.json(data))
+      })
       .catch(err => res.status(500).json(err));
   },
 
@@ -16,7 +17,7 @@ module.exports = {
       .catch(err => res.status(500).json(err));
   },
   create: function(req, res) {
-    console.log('!', req.body)
+    console.log(req.body)
     db.Task
       .create(req.body)
       .then(dbModel => res.json(dbModel))

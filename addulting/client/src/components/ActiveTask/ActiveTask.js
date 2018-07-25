@@ -5,9 +5,8 @@ import API from "../../utils/API";
 import 'react-select/dist/react-select.css';
 import TaskDetail from "../TaskDetail";
 import {Panel,ListGroup,ListGroupItem} from "react-bootstrap";
-import SubjectEntry from "../SubjectEntry";
-import TaskEntry from "../TaskEntry";
 import "./ActiveTask.css"
+
 
 
 class ActiveTask extends React.Component {
@@ -25,7 +24,7 @@ class ActiveTask extends React.Component {
     }
 	
     loadTasks = () => {
-        API.getTasks(this.props.match.task_id)
+        API.getTasks(this.pr)
 			.then(res => this.setState({ tasks: res.data  }))
 			
             .catch(err => console.log(err));
@@ -39,7 +38,7 @@ class ActiveTask extends React.Component {
                         <Panel>
                             <Panel.Heading>
                                 <Panel.Title componentClass="h3">
-                                    Tasks
+                                    
                                 </Panel.Title>
                             </Panel.Heading>
                                 <Panel.Body>

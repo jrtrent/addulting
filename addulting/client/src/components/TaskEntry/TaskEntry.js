@@ -3,6 +3,7 @@ import "./TaskEntry.css";
 import Jumbotron from "../../components/Jumbotron";
 import { Container, Row, Col } from "../Grid";
 import { FormBtn } from "../../components/Form";
+import {List, ListItem} from "../List";
 import API from "../../utils/API";
 import 'react-select/dist/react-select.css';
 
@@ -23,8 +24,8 @@ class TaskEntry extends Component {
     }
 
     loadTasks = () => {
-        API.getTasks()
-            .then(res => this.setState({ tasks: res.data }))
+        API.getTask()
+            .then(res => this.setState({ task: res.data }))
             .catch(err => console.log(err));
     };
 
@@ -65,7 +66,6 @@ class TaskEntry extends Component {
                     subject:""
                 })
 
-                this.loadTasks()
             })
             .catch(e => {
                 console.log(e);
@@ -119,6 +119,22 @@ class TaskEntry extends Component {
                             <Jumbotron>
                                 <h1>My Tasks</h1>
                             </Jumbotron>
+                            {this.state.tasks.length ? (
+							<List>
+								{this.state.tasks.map(task => (
+									<ListItem key={task._id}>
+						
+		
+												{task.title} 
+											
+										
+										
+									</ListItem>
+								))}
+							</List>
+                            ) : ( 
+                                <h4>Add Tasks</h4>
+                            )}
                         </Col>
                     </Row>
                 </Container>

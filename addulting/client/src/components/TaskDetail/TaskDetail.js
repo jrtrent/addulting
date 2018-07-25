@@ -1,6 +1,5 @@
 import React from 'react';
 import {Modal, Button} from 'react-bootstrap';
-import {Col, Row} from "../Grid";
 import Timer from "../Timer";
 
 class TaskDetail extends React.Component {
