@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import "./TaskEntry.css";
 import Jumbotron from "../../components/Jumbotron";
-import { Container, Row, Col } from "../Grid";
+import { Container, Row, Col} from "../Grid";
 import { FormBtn } from "../../components/Form";
 import {List, ListItem} from "../List";
+
 import API from "../../utils/API";
 import 'react-select/dist/react-select.css';
 
@@ -119,22 +120,11 @@ class TaskEntry extends Component {
                             <Jumbotron>
                                 <h1>My Tasks</h1>
                             </Jumbotron>
-                            {this.state.tasks.length ? (
-							<List>
-								{this.state.tasks.map(task => (
-									<ListItem key={task._id}>
-						
-		
-												{task.title} 
-											
-										
-										
-									</ListItem>
-								))}
-							</List>
-                            ) : ( 
-                                <h4>Add Tasks</h4>
-                            )}
+                            <div>
+                            {this.state.tasks.map((task, _id) => <p>
+                                    {task}</p>)}
+                            </div>
+                            
                         </Col>
                     </Row>
                 </Container>
