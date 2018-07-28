@@ -1,7 +1,7 @@
 module.exports ={
-    Subject: require("./Subject"),
-    Task: require("./taskModel"),
-    User: require("./userModel")
+    category: require("./Category"),
+    dailytask: require("./dailytask"),
+    User: require("./UserModel")
  
 
 };

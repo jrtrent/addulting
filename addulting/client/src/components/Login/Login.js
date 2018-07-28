@@ -1,88 +1,67 @@
-import React from 'react'
-import {Panel} from 'react-bootstrap';
-import {Col} from "../Grid";
-import "./Login.css";
-import API from "../../utils/API"
+import React, {Component} from 'react';
+import axios from 'axios';
 
 
-class Login extends React.Component {
-    state = {
-        username: '',
-        password: '',
-        email:''
+
+class Login extends Component  {
+    Login(User) {
+        axios.request({
+            method:"post",
+            url:'http://localhost:3000/api/Users/login',
+            data:User
+
+        }).then(response => {
+    
+            this.props.history.push('/dailytasks')
+        }).catch(err=>console.log(err));
+
+    } //push is where it is redirected to. 
+
+    handleFormSubmit = (e) => {
+        e.preventDefault();
        
-    } 
-
-
-    handleChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
+        const User = {
+            username: this.refs.username.value,
+            email:this.refs.email.value,
+            password: this.refs.password.value
             
-        })
-   
+
+        }
+        this.Login(User);
+       
     }
     
-    handleNewLogin=(e) => {
-        e.preventDefault();
-        this.setState({
-            newLogin: e.target.value
-        })
-    }
-
-    loadRedirect = () => {
-        this.setState({Red:'subjectentry'})
-    }
-
-    handleSubmit =(e) => {
-        e.preventDefault();
-        console.log(e);
-       API.getUser(this.state.username)
-       .then(response => {
-        console.log(response)
-        if(!response.data.errmsg) {
-            console.log('login complete')
-            this.props.history.push('/subjectentry')
-        } else {
-            console.log('login incorrect')
-        }
-    })
-    }
-
     render() {
-            return (
-                <div className="Login">
-                <Col size="sm-3 md-4 app-center">
-                <Panel>
-                <Panel.Heading>
-                <h1>Login Form</h1>
-                </Panel.Heading>
-                <Panel.Body>
-                <form>
-                <label htmlFor="username">Username: </label>
-                <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleChange}
-                />
-
-                <label htmlFor="password">Password: </label>
-                <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleChange}
-                />
-                <button onClick={this.handleSubmit}>Login</button>
-                </form>
-                </Panel.Body>
-            </Panel>
-            </Col>
+        return (
+           <div>
+                <a className="waves-effect waves-light btn-small" href="/dailytasks"><i className="material-icons left">arrow_back</i>Back</a>
+              <h1>Login </h1>
+              <br />
+              <form onSubmit={this.handleFormSubmit.bind(this)}>
+                <div className="input-field">
+                    <input type="text" name="username" ref="username" />
+                    <label htmlFor="username">UserName</label>
                 </div>
-                
-                
-            )
-        }
-    }
+                <div className="input-field">
+                    <input type="email" name="email" ref="email" />
+                    <label htmlFor="email">email</label>
+                </div>
+                <div className="input-field">
+                    <input type="password" name="password" ref="password" />
+                    <label htmlFor="password">Password</label>
+                </div>
+               
+                <input type="submit" value="Save" className="btn" />
+            
+              </form>
    
-export default Login
+        
+         </div>
+   
+
+        );
+    }
+
+};
+
+export default Login;

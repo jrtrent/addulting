@@ -79,12 +79,13 @@ class Timer extends Component {
   }
 render() 
   {
+    debugger;
       return (
         <div className="container-fluid">
             <TimerHeader />
               <TimerDisplay 
               currentTime={this.state.currentTime}
-              timerState={this.state.timerStates}/>
+              timerState={this.state.timerState}/>
               <TimerButton 
               startTimer={this.startTimer} 
               stopTimer={this.stopTimer}
@@ -102,4 +103,4 @@ render()
   }
 }
 
-export default Timer
+export default Timer;

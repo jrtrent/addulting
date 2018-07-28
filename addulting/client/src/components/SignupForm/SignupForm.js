@@ -1,83 +1,68 @@
-import React from 'react'
-import API from "../../utils/API"
-import "./SignupForm.css";
+import React, {Component} from 'react';
+import axios from 'axios';
 
-class SignupForm extends React.Component {
-    state = {
-            username: '',
-            password: '',
-            email:''
-           
-        } 
 
-    handleNewUser=(e) => {
+
+
+class SignupForm extends Component  {
+    AddUser(newUser) {
+        axios.request({
+            method:"post",
+            url:'http://localhost:3000/api/Users',
+            data:newUser
+
+        }).then(response => {
+    
+            this.props.history.push('/Login')
+        }).catch(err=>console.log(err));
+
+    } //push is where it is redirected to. 
+
+    handleFormSubmit = (e) => {
         e.preventDefault();
-        this.setState({
-            newUser: e.target.value
-        })
-    }
-    handleChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
+       
+        const newUser = {
+            username: this.refs.username.value,
+            email:this.refs.email.value,
+            password: this.refs.password.value
             
-        })
-   
-    }
 
-    handleSubmit =(e) => {
-        e.preventDefault();
-        API.saveUser({
-            username: this.state.username,
-            password: this.state.password,
-            email: this.state.email
-        })
-        .then(response => {
-            console.log(response)
-            if(!response.data.errmsg) {
-                console.log('signin complete')
-                this.props.history.push('/login')
-            } else {
-                console.log('duplicate')
-            }
-        })
-    }
-
-    render() {
-            return (
-                <div className="SignupForm">
-                <h1>Signup Form</h1>
-                <label htmlFor="username">Username: </label>
-                <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleChange}
-                />
-
-                <label htmlFor="password">Password: </label>
-                <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleChange}
-                />
-
-                 <label htmlFor="email">Email: </label>
-                <input
-                type="email"
-                name="email"
-                value={this.state.email}
-                onChange={this.handleChange}
-                />
-
-            
-                <button onClick={this.handleSubmit}>Signup</button>
-                
-                </div>
-                
-            )
         }
+        this.AddUser(newUser);
+       
     }
-   
+    
+    render() {
+        return (
+           <div>
+                <a className="waves-effect waves-light btn-small" href="/dailytasks"><i className="material-icons left">arrow_back</i>Back</a>
+              <h1>SignupForm </h1>
+              <br />
+              <form onSubmit={this.handleFormSubmit.bind(this)}>
+                <div className="input-field">
+                    <input type="text" name="username" ref="username" />
+                    <label htmlFor="username">UserName</label>
+                </div>
+                <div className="input-field">
+                    <input type="email" name="email" ref="email" />
+                    <label htmlFor="email">email</label>
+                </div>
+                <div className="input-field">
+                    <input type="password" name="password" ref="password" />
+                    <label htmlFor="password">Password</label>
+                </div>
+               
+                <input type="submit" value="Save" className="btn" />
+            
+              </form>
+     
 
-export default SignupForm
+        
+         </div>
+   
+        );
+    }
+
+};
+
+export default SignupForm;
